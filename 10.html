@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>10</title>
+  </head>
+  <body>
+    <script>
+      class AirPlane {
+        constructor(type, weight, fuelTank) {
+          this.type = type;
+          this.weight = weight;
+          this.fuelTank = +fuelTank;
+          this.fuel = "11";
+          this.namePylot = "Сережа";
+          this.numberPylot = "1";
+        }
+        getInfo() {
+          console.log(
+            `Самолет ${this.type} вес ${this.weight} ,топлива в баке ${this.fuel} тон .`
+          );
+        }
+        addFuel(number) {
+          this.number = +number;
+          if (+this.fuel + this.number < this.fuelTank) {
+            this.fuel = +this.fuel + this.number;
+          } else {
+            this.fuel = this.fuelTank;
+          }
+        }
+        setFullTank() {
+          this.fuel = this.fuelTank;
+        }
+        setEmptyTank() {
+          this.fuel = "0";
+        }
+        setPylotInfo(namePylot, numberPylot) {
+          this.namePylot = namePylot;
+          this.numberPylot = numberPylot;
+        }
+        getPylotInfo() {
+          console.log(
+            `Пилота зовут ${this.namePylot} его номер ${this.numberPylot}  .`
+          );
+        }
+        getCurrentWeight() {
+          console.log(`Текущий вес с топливом  ${+this.weight + +this.fuel} .`);
+        }
+      }
+      let airPlane = new AirPlane("боинг", "162", "50");
+      airPlane.getInfo();
+      airPlane.addFuel("21");
+      airPlane.getInfo();
+      airPlane.setFullTank();
+      airPlane.getInfo();
+      airPlane.setEmptyTank();
+      airPlane.getInfo();
+      airPlane.getPylotInfo();
+      airPlane.getCurrentWeight();
+      airPlane.addFuel("200");
+      airPlane.getInfo();
+      class PassengerPlane extends AirPlane {
+        getInfo() {
+          super.getInfo();
+          this.passengersNumber = "100";
+          console.log(
+            `Самолет ${this.type} вмещает ${this.passengersNumber} пассажиров .`
+          );
+        }
+      }
+      let passengerPlane = new PassengerPlane("боинг2", "170", "40");
+      passengerPlane.getInfo();
+
+      class Freighter extends AirPlane {
+        constructor(type, weight, fuelTank, loadCapacity) {
+          super(type);
+          this.weight = weight;
+          this.fuelTank = +fuelTank;
+          this.loadCapacity = loadCapacity;
+          this.currentLoad = "0";
+        }
+        addLoad(numberLoad) {
+          this.numberLoad = numberLoad;
+          if (+this.currentLoad + this.numberLoad < this.loadCapacity) {
+            this.currentLoad = +this.currentLoad + +this.numberLoad;
+          }
+        }
+        resetLoad() {
+          this.currentLoad = "0";
+        }
+        getCurrentWeight() {
+          console.log(
+            `Текущий вес самолета ${
+              this.type
+            } состоит из веса самого самолета ${this.weight} топлива ${
+              this.fuel
+            } и груза ${this.currentLoad} 
+             итого ${+this.weight + +this.fuel + +this.currentLoad}.`
+          );
+        }
+      }
+      let freighter = new Freighter("боинг3", "162", "30", "50");
+
+      freighter.getCurrentWeight();
+      freighter.addLoad("44");
+      freighter.getCurrentWeight();
+      freighter.resetLoad();
+      freighter.getCurrentWeight();
+      freighter.addFuel("13");
+      freighter.addLoad("4");
+      freighter.getCurrentWeight();
+    </script>
+  </body>
+</html>
